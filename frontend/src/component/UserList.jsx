@@ -12,7 +12,7 @@ const UserList = () => {
   useEffect(() => {
     const fetchAllUser = async () => {
       try {
-        const response = await axios.get("http://localhost:8009/api/get/all/users", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get/all/users`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

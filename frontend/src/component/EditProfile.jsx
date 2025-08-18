@@ -61,12 +61,16 @@ const EditProfile = () => {
     });
 
     try {
-      await axios.put(`http://localhost:8009/api/update/${userId}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/update/${userId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Profile updated successfully!");
     } catch {
       alert("Failed to update profile.");
@@ -78,9 +82,12 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8009/api/get/user/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/get/user/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         const userData = data.userData;
         setForm({
           fullName: userData.fullName || "",
@@ -110,22 +117,49 @@ const EditProfile = () => {
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block font-medium">Full Name</label>
-            <input name="fullName" value={form.fullName} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
 
             <label className="block font-medium mt-4">Location</label>
-            <input name="location" value={form.location} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              name="location"
+              value={form.location}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
 
             <label className="block font-medium mt-4">Availability</label>
-            <input name="availability" value={form.availability} onChange={handleChange} className="w-full border p-2 rounded" />
+            <input
+              name="availability"
+              value={form.availability}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
 
             <label className="block font-medium mt-4">Profile Visibility</label>
-            <select name="profile" value={form.profile} onChange={handleChange} className="w-full border p-2 rounded">
+            <select
+              name="profile"
+              value={form.profile}
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            >
               <option value="Public">Public</option>
               <option value="Private">Private</option>
             </select>
 
-            <label className="block font-medium mt-4">Upload Profile Photo</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} className="w-full border p-2 rounded" />
+            <label className="block font-medium mt-4">
+              Upload Profile Photo
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full border p-2 rounded"
+            />
           </div>
 
           <div>
@@ -146,7 +180,14 @@ const EditProfile = () => {
                 value={newOfferedSkill}
                 onChange={(e) => setNewOfferedSkill(e.target.value)}
                 onKeyDown={(e) =>
-                  setNewOfferedSkill(handleSkillKey(e.key, newOfferedSkill, setForm, "skillsOffered"))
+                  setNewOfferedSkill(
+                    handleSkillKey(
+                      e.key,
+                      newOfferedSkill,
+                      setForm,
+                      "skillsOffered"
+                    )
+                  )
                 }
                 className="w-full border p-2 rounded"
                 placeholder="Add a skill and press Enter"
@@ -170,7 +211,14 @@ const EditProfile = () => {
                 value={newWantedSkill}
                 onChange={(e) => setNewWantedSkill(e.target.value)}
                 onKeyDown={(e) =>
-                  setNewWantedSkill(handleSkillKey(e.key, newWantedSkill, setForm, "skillsWanted"))
+                  setNewWantedSkill(
+                    handleSkillKey(
+                      e.key,
+                      newWantedSkill,
+                      setForm,
+                      "skillsWanted"
+                    )
+                  )
                 }
                 className="w-full border p-2 rounded"
                 placeholder="Add a skill and press Enter"
@@ -181,7 +229,9 @@ const EditProfile = () => {
               <div className="w-40 h-40 mx-auto border-4 border-dashed rounded-full overflow-hidden">
                 {form.profilePhoto && typeof form.profilePhoto === "string" ? (
                   <img
-                    src={`http://localhost:8009${form.profilePhoto}`}
+                    src={`${import.meta.env.VITE_BACKEND_URL}${
+                      form.profilePhoto
+                    }`}
                     alt="Profile"
                     className="object-cover w-full h-full"
                   />

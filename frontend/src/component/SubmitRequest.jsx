@@ -19,18 +19,24 @@ const SubmitRequest = () => {
     const fetchData = async () => {
       try {
         const [resTheir, resYours] = await Promise.all([
-          axios.get(`http://localhost:8009/api/get/user/${id}`, {
+          axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get/user/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get(`http://localhost:8009/api/get/user/${user._id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
+          axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/api/get/user/${user._id}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
         ]);
 
         setTheirSkills(resTheir.data.userData.skillsWanted || []);
         setYourSkills(resYours.data.userData.skillsOffered || []);
       } catch (error) {
-        console.error("Error fetching user data:", error.response?.data || error.message);
+        console.error(
+          "Error fetching user data:",
+          error.response?.data || error.message
+        );
       }
     };
 
@@ -41,7 +47,7 @@ const SubmitRequest = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8009/api/user/swap-request",
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/swap-request`,
         {
           to: id,
           offeredSkill: selectedOfferedSkill,
@@ -56,7 +62,10 @@ const SubmitRequest = () => {
       alert("Request sent successfully!");
       navigate("/");
     } catch (error) {
-      console.error("Error submitting request:", error.response?.data || error.message);
+      console.error(
+        "Error submitting request:",
+        error.response?.data || error.message
+      );
       alert("Failed to send request");
     }
   };

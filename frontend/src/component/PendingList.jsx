@@ -10,12 +10,18 @@ const PendingList = () => {
   useEffect(() => {
     const fetchSentRequests = async () => {
       try {
-        const res = await axios.get("http://localhost:8009/api/get/all/request", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/get/all/request`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setRequests(res.data.allSendRequest || []);
       } catch (error) {
-        console.error("Failed to fetch sent requests:", error.response?.data || error.message);
+        console.error(
+          "Failed to fetch sent requests:",
+          error.response?.data || error.message
+        );
       }
     };
 
@@ -41,7 +47,9 @@ const PendingList = () => {
                 d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2m0 0H5a2 2 0 00-2 2v2m7-3v3m0 0v3m0-3h3m-3 0H9m-3 0V9m0 0H3m3 3h3m0 0h3m-3 0v3m-3-3h3m-3-3V9"
               ></path>
             </svg>
-            <p className="text-lg text-gray-600 font-medium">No pending requests at the moment.</p>
+            <p className="text-lg text-gray-600 font-medium">
+              No pending requests at the moment.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
