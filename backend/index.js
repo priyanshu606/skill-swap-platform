@@ -29,7 +29,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', userRouter);
 
 // Start server
-const PORT = 8009;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+// const PORT = 8009;
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server running at http://localhost:${PORT}`);
+// });
+export default app;
