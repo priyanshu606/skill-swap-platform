@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserCard from "./userCard";
+import UserCard from "./UserCard"
 import axios from "axios";
 
 const UserList = () => {
