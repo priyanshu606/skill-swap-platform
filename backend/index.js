@@ -1,10 +1,11 @@
-const express = require('express')
+const express = require('express');
 const cookieParser = require('cookie-parser');
-const userRouter = require('./routers/userRouter')
-const {connectToMongoDb} = require('./connect');
-const app = express();
-
+const userRouter = require('./routers/userRouter');
+const { connectToMongoDb } = require('./connect');
 const cors = require('cors');
+const path = require('path');
+
+const app = express();
 
 connectToMongoDb("mongodb://127.0.0.1:27017/skill-swap-platform")
   .then(() => console.log("✅ MongoDB connected"))
@@ -13,7 +14,7 @@ connectToMongoDb("mongodb://127.0.0.1:27017/skill-swap-platform")
     process.exit(1);
   });
 
-  //middleware
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -21,12 +22,14 @@ app.use(cors({
   credentials: true
 }));
 
-// routing
-app.use('/api',userRouter)
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// API routes
+app.use('/api', userRouter);
 
+// Start server
 const PORT = 8009;
-app.listen(PORT,()=>{
-    console.log(`backend server running on http://localhost:${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});

@@ -1,8 +1,9 @@
 import { Route,  Routes } from "react-router-dom"
 import HomePage from "./pages/HomePage"
-import UserProfile from "./component/UserProfile"
 import UsersProfile from "./component/UsersProfile"
 import SubmitRequest from "./component/SubmitRequest"
+import EditProfile from "./component/EditProfile"
+import ViewProfile from "./component/ViewProfile"
 
 function App() {
   
@@ -11,7 +12,8 @@ function App() {
     <>
     <Routes>
       <Route path="/" element= {<HomePage/>}/> 
-      <Route path="/profile" element= {<UserProfile/>}/> 
+       <Route path="/edit-profile" element={<EditProfile/>} />
+        <Route path="/view-profile" element={<ViewProfile/>} />
       <Route path="/user/:userId" element={<UsersProfile/>} />
       <Route path="/user/request/:id" element={<SubmitRequest/>} />
     </Routes>

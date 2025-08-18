@@ -25,7 +25,7 @@ const UserMenu = ({handleLogout, isOpen, onClose }) => {
       <ul className="py-2">
         <li>
           <Link
-            to="/profile"
+            to="/view-profile"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
           >
             Open Profile
