@@ -224,22 +224,6 @@ const EditProfile = () => {
                 placeholder="Add a skill and press Enter"
               />
             </div>
-
-            <div className="mt-4 text-center">
-              <div className="w-40 h-40 mx-auto border-4 border-dashed rounded-full overflow-hidden">
-                {form.profilePhoto && typeof form.profilePhoto === "string" ? (
-                  <img
-                    src={`${import.meta.env.VITE_BACKEND_URL}${
-                      form.profilePhoto
-                    }`}
-                    alt="Profile"
-                    className="object-cover w-full h-full"
-                  />
-                ) : (
-                  <span className="text-sm text-gray-400">No photo</span>
-                )}
-              </div>
-            </div>
           </div>
         </div>
 

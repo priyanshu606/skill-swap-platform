@@ -40,8 +40,10 @@ const UsersProfile = () => {
   return (
     <div className="min-h-screen bg-white text-black flex justify-center py-12 px-4">
       <div className="w-full max-w-5xl flex flex-col md:flex-row gap-10 bg-white rounded-xl shadow-2xl p-8 min-h-[80vh]">
+        
         {/* Left Section */}
         <div className="flex-1 flex flex-col justify-between">
+         
           <div>
             <h2 className="text-4xl font-bold mb-6">{user.fullName}</h2>
 
@@ -103,7 +105,7 @@ const UsersProfile = () => {
         {/* Right Section */}
         <div className="w-full md:w-64 flex flex-col items-center justify-start">
           <div className="w-52 h-52 rounded-full bg-gray-100 border-4 border-cyan-700 flex items-center justify-center text-5xl shadow-md">
-            👤
+             <img src={`${import.meta.env.VITE_BACKEND_URL}${user.profilePhoto}`} alt="" />
           </div>
           <p className="mt-4 text-gray-600">User Profile Avatar</p>
         </div>

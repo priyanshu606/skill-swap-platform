@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MapPin, CalendarDays } from "lucide-react";
 
 const ViewProfile = () => {
   const [user, setUser] = useState(null);
@@ -30,59 +31,100 @@ const ViewProfile = () => {
   if (!user) return <p className="text-center mt-20">Loading profile...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
-      <div className="flex items-center gap-6">
-        <img
-          src={`${import.meta.env.VITE_BACKEND_URL}${user.profilePhoto}`}
-          alt="Profile"
-          className="w-32 h-32 object-cover rounded-full border-2 border-indigo-500"
-        />
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-indigo-700">
-            {user.fullName}
-          </h2>
-          <p className="text-gray-600">{user.location}</p>
-          <p className="text-sm text-gray-500">{user.availability}</p>
-          <p className="text-sm mt-1 text-gray-500">
-            Profile: {user.isPublic ? "Public" : "Private"}
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 py-12 px-4">
+      <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
+        
+        {/* Banner */}
+       <div className="relative h-60 bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-100">
+          <button
+            onClick={() => navigate("/edit-profile")}
+            className="absolute top-4 right-4 bg-white text-indigo-600 px-6 py-2 rounded-lg shadow-lg hover:bg-gray-100 transition"
+          >
+            Edit Profile
+          </button>
         </div>
-        <button
-          onClick={() => navigate("/edit-profile")}
-          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
-        >
-          Edit Profile
-        </button>
-      </div>
 
-      <div className="mt-6">
-        <h3 className="font-semibold text-lg text-indigo-700">
-          Skills Offered
-        </h3>
-        <ul className="flex flex-wrap gap-2 mt-2">
-          {user.skillsOffered.map((skill, index) => (
-            <li
-              key={index}
-              className="bg-indigo-100 px-3 py-1 rounded-full text-sm"
-            >
-              {skill}
-            </li>
-          ))}
-        </ul>
+        {/* Profile Info */}
+        <div className="px-10 pb-12">
+          <div className="relative -mt-24 flex flex-col md:flex-row items-center md:items-end gap-8">
+            
+            {/* Profile Picture */}
+            {user.profilePhoto ? (
+              <img
+                src={`${import.meta.env.VITE_BACKEND_URL}${user.profilePhoto}`}
+                alt="Profile"
+                className="w-40 h-40 object-cover rounded-full border-4 border-white shadow-xl"
+              />
+            ) : (
+              <div className="w-40 h-40 rounded-full bg-indigo-600 flex items-center justify-center text-white text-5xl font-bold shadow-xl border-4 border-white">
+                {user.fullName.charAt(0).toUpperCase()}
+              </div>
+            )}
 
-        <h3 className="font-semibold text-lg text-pink-700 mt-4">
-          Skills Wanted
-        </h3>
-        <ul className="flex flex-wrap gap-2 mt-2">
-          {user.skillsWanted.map((skill, index) => (
-            <li
-              key={index}
-              className="bg-pink-100 px-3 py-1 rounded-full text-sm"
-            >
-              {skill}
-            </li>
-          ))}
-        </ul>
+            {/* User Details */}
+            <div className="text-center md:text-left flex-1">
+              <h2 className="text-4xl font-bold text-gray-900">{user.fullName}</h2>
+              <p className="flex items-center justify-center md:justify-start text-gray-600 gap-2 mt-2 text-lg">
+                <MapPin size={20} /> {user.location || "Unknown"}
+              </p>
+              <p className="flex items-center justify-center md:justify-start text-green-600 gap-2 mt-1 text-base">
+                <CalendarDays size={20} /> {user.availability || "Available"}
+              </p>
+              <p className="text-gray-500 mt-1">
+                Profile:{" "}
+                <span className="font-medium">
+                  {user.isPublic ? "Public" : "Private"}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Sections */}
+        <div className="px-10 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          
+          {/* Skills Offered */}
+          <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-2xl p-8 shadow-md hover:shadow-xl transition">
+            <h3 className="text-2xl font-semibold text-indigo-800 mb-6 flex items-center gap-2">
+              ✨ Skills Offered
+            </h3>
+            {user.skillsOffered.length > 0 ? (
+              <ul className="flex flex-wrap gap-3">
+                {user.skillsOffered.map((skill, index) => (
+                  <li
+                    key={index}
+                    className="bg-indigo-200 px-5 py-2 rounded-full text-sm font-medium text-indigo-900 shadow-sm"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500">No skills added yet</p>
+            )}
+          </div>
+
+          {/* Skills Wanted */}
+          <div className="bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200 rounded-2xl p-8 shadow-md hover:shadow-xl transition">
+            <h3 className="text-2xl font-semibold text-pink-800 mb-6 flex items-center gap-2">
+              ⚡ Skills Wanted
+            </h3>
+            {user.skillsWanted.length > 0 ? (
+              <ul className="flex flex-wrap gap-3">
+                {user.skillsWanted.map((skill, index) => (
+                  <li
+                    key={index}
+                    className="bg-pink-200 px-5 py-2 rounded-full text-sm font-medium text-pink-900 shadow-sm"
+                  >
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500">No skills added yet</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

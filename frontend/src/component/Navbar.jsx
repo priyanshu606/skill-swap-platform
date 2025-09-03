@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserMenu from './UserMenu';
+import {AuthContext} from '../context/AuthContext';
 
-const Navbar = ({ onLoginClose }) => {
+
+const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
+  const {showPopup,setShowPopup} = useContext(AuthContext);
   useEffect(() => {
     const checkLogin = () => {
       const token = localStorage.getItem('skillSwapToken');
@@ -58,7 +60,7 @@ const Navbar = ({ onLoginClose }) => {
           </div>
         ) : (
           <button
-            onClick={onLoginClose}
+            onClick={()=>{setShowPopup(!showPopup)}}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow-md transition duration-300"
           >
             Login

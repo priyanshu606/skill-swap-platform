@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const Filter = ({setSelectedOption,selectedOption}) => {
+  const { setShowPopup } = useContext(AuthContext);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const token = localStorage.getItem("token"); 
+    if (value === "pending" && !token) {
+      setShowPopup(true);
+      return;
+    }
+
+    setSelectedOption(value);
+  };
   return (
     <div className="w-full flex justify-center py-6 mt-20">
       <div className="w-2/3 flex flex-col md:flex-row items-center justify-between gap-6 px-4">
@@ -9,7 +21,7 @@ const Filter = ({setSelectedOption,selectedOption}) => {
         <div className="w-full md:w-1/3">
           <select
            value={selectedOption}
-           onChange={(e)=>{setSelectedOption(e.target.value)}}
+           onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
           >
             <option value="availability">Availability</option>

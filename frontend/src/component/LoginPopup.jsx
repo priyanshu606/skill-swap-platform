@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
-const LoginPopup = ({ onClose, openSignUp }) => {
+import { AuthContext } from "../context/AuthContext";
+const LoginPopup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const {showPopup,setShowPopup,signUpPopup,setSignUpPopup} =  useContext(AuthContext);
+  const handlePopup = ()=>{
+    setSignUpPopup(!signUpPopup),
+    setShowPopup(!showPopup);
+  }
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -26,7 +31,7 @@ const LoginPopup = ({ onClose, openSignUp }) => {
 
       window.dispatchEvent(new Event("login-success"));
       alert("Login successful!");
-      onClose(); // close the modal
+      setShowPopup(!showPopup);
     } catch (err) {
       console.error(err);
       alert("Login failed: " + (err.response?.data?.msg || "Server Error"));
@@ -42,7 +47,7 @@ const LoginPopup = ({ onClose, openSignUp }) => {
         {/* ❌ Close Button */}
         <button
           type="button"
-          onClick={onClose}
+          onClick={()=>{setShowPopup(!showPopup)}}
           className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-3xl cursor-pointer font-bold"
         >
           &times;
@@ -136,7 +141,7 @@ const LoginPopup = ({ onClose, openSignUp }) => {
           <a
             href="#"
             className="text-blue-500 hover:underline font-medium"
-            onClick={openSignUp}
+            onClick={handlePopup}
           >
             Sign up
           </a>

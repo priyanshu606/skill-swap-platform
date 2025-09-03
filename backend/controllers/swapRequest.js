@@ -1,3 +1,4 @@
+const { response } = require("express");
 const SwapRequest = require("../model/swapRequest");
 
 async function handleSwapRequest(req, res) {
@@ -45,4 +46,17 @@ async function getAllSendRequest(req,res) {
   
 } 
 
-module.exports = { handleSwapRequest ,getAllSendRequest};
+async function getAllRecieveRequest(req,res) {
+  try {
+    const allRecieveReqest = await SwapRequest.find({to:req.user._id}).populate('from').sort({createdAt:-1});
+    res.status(200).json({
+      success:true,
+      message:"allSendRequest fetched successfully",
+      allRecieveReqest,
+    })
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+}
+
+module.exports = { handleSwapRequest ,getAllSendRequest,getAllRecieveRequest};

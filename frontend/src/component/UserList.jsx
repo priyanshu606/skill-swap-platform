@@ -44,11 +44,8 @@ const UserList = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 md:px-20 py-10 space-y-8 bg-gradient-to-br from-white via-[#f2f2f2] to-[#e0e0e0]">
-      <h1 className="text-center text-4xl font-bold text-gray-800 mb-8 drop-shadow-md">
-        🔄 Explore Skill Swap Opportunities
-      </h1>
-
+    <div className="min-h-screen px-4 md:px-20 py-1 space-y-8 bg-gradient-to-br from-white via-[#f2f2f2] to-[#e0e0e0]">
+      
       {publicUser.slice(start, end).map((user, index) => (
         <UserCard key={index} user={user} />
       ))}

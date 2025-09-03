@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routers/userRouter');
@@ -7,7 +8,7 @@ const path = require('path');
 
 const app = express();
 
-connectToMongoDb("mongodb://127.0.0.1:27017/skill-swap-platform")
+connectToMongoDb(process.env.MONGO_URL)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
@@ -28,9 +29,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // API routes
 app.use('/api', userRouter);
 
-// Start server
-// const PORT = 8009;
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running at http://localhost:${PORT}`);
-// });
-export default app;
+
+app.listen(process.env.PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${process.env.PORT}`);
+});

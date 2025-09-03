@@ -4,7 +4,8 @@ const {handleSignupUser,handleLoginUser} = require('../controllers/signupUser')
 const {handleUpdateUser,handleGetUser} = require('../controllers/userProfile')
 const {handleGetAllUser} = require('../controllers/allPublicUser')
 const {authMiddleware} = require('../middleware/authMiddleware')
-const {handleSwapRequest,getAllSendRequest} = require('../controllers/swapRequest')
+const {handleStatus} = require('../controllers/status')
+const {handleSwapRequest,getAllSendRequest,getAllRecieveRequest} = require('../controllers/swapRequest')
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -33,6 +34,12 @@ router.get('/get/all/users',handleGetAllUser);
 
 //swap request routing
 router.post('/user/swap-request',authMiddleware,handleSwapRequest);
+
+// get all sending and receiving request
 router.get('/get/all/request',authMiddleware,getAllSendRequest);
+router.get('/get/all/recieve-request',authMiddleware,getAllRecieveRequest);
+
+//update status
+router.put('/update/status/:id',authMiddleware,handleStatus);
 
 module.exports = router;

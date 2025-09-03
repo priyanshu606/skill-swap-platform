@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
-const SignUpPopup = ({ onClose, openLogin }) => {
+import { AuthContext } from "../context/AuthContext";
+const SignUpPopup = () => {
+ 
+  const {showPopup,setShowPopup,signUpPopup,setSignUpPopup} =  useContext(AuthContext);
+
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -52,8 +56,8 @@ const SignUpPopup = ({ onClose, openLogin }) => {
           form
         );
         console.log("✅ User registered:", response.data);
-        onClose();
-        openLogin();
+        setShowPopup(!showPopup);
+        setSignUpPopup(!signUpPopup);
       } catch (error) {
         console.error(
           "❌ Signup failed:",
@@ -72,7 +76,7 @@ const SignUpPopup = ({ onClose, openLogin }) => {
       <div className="relative w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl border border-blue-100">
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={()=>{setSignUpPopup(!signUpPopup)}}
           className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-500 transition"
         >
           <IoClose />
@@ -158,7 +162,7 @@ const SignUpPopup = ({ onClose, openLogin }) => {
         <p className="mt-5 text-center text-sm text-gray-600">
           Already have an account?{" "}
           <button
-            onClick={openLogin}
+            type="submit"
             className="text-blue-500 hover:underline font-medium"
           >
             Login here
