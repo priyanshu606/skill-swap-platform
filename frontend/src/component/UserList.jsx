@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard"
 import axios from "axios";
+import { useContext } from "react";
+import { FilterUserContext } from "../context/FilterUserContxt";
 
 const UserList = () => {
   const CARDS_PER_PAGE = 2;
   const [page, setPage] = useState(0);
   const token = localStorage.getItem("skillSwapToken");
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  const [publicUser, setPublicUser] = useState([]);
-
+  const {publicUser, setPublicUser} =  useContext(FilterUserContext)
   useEffect(() => {
     const fetchAllUser = async () => {
       try {
@@ -26,7 +27,7 @@ const UserList = () => {
 
         setPublicUser(filteredUsers);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.log("Error fetching users:", error);
       }
     };
 

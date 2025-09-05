@@ -5,6 +5,7 @@ const {handleUpdateUser,handleGetUser} = require('../controllers/userProfile')
 const {handleGetAllUser} = require('../controllers/allPublicUser')
 const {authMiddleware} = require('../middleware/authMiddleware')
 const {handleStatus} = require('../controllers/status')
+const {handleSearchUser} = require('../controllers/searchUser')
 const {handleSwapRequest,getAllSendRequest,getAllRecieveRequest} = require('../controllers/swapRequest')
 const router = express.Router();
 
@@ -41,5 +42,8 @@ router.get('/get/all/recieve-request',authMiddleware,getAllRecieveRequest);
 
 //update status
 router.put('/update/status/:id',authMiddleware,handleStatus);
+
+// handle search user
+router.get('/users/search',authMiddleware,handleSearchUser);
 
 module.exports = router;
