@@ -107,70 +107,92 @@ const EditProfile = () => {
   }, [userId, token]);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center">Edit Profile</h2>
+    <div className="p-4 sm:p-6 max-w-6xl mx-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">
+        Edit Profile
+      </h2>
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 bg-white shadow-xl rounded-xl p-8"
+        className="space-y-4 sm:space-y-6 bg-white shadow-xl rounded-xl p-4 sm:p-6 lg:p-8"
         encType="multipart/form-data"
       >
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label className="block font-medium">Full Name</label>
-            <input
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-4">
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Full Name
+              </label>
+              <input
+                name="fullName"
+                value={form.fullName}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+              />
+            </div>
 
-            <label className="block font-medium mt-4">Location</label>
-            <input
-              name="location"
-              value={form.location}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            />
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Location
+              </label>
+              <input
+                name="location"
+                value={form.location}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+              />
+            </div>
 
-            <label className="block font-medium mt-4">Availability</label>
-            <input
-              name="availability"
-              value={form.availability}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            />
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Availability
+              </label>
+              <input
+                name="availability"
+                value={form.availability}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+              />
+            </div>
 
-            <label className="block font-medium mt-4">Profile Visibility</label>
-            <select
-              name="profile"
-              value={form.profile}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-            >
-              <option value="Public">Public</option>
-              <option value="Private">Private</option>
-            </select>
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Profile Visibility
+              </label>
+              <select
+                name="profile"
+                value={form.profile}
+                onChange={handleChange}
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+              >
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+              </select>
+            </div>
 
-            <label className="block font-medium mt-4">
-              Upload Profile Photo
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full border p-2 rounded"
-            />
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Upload Profile Photo
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+              />
+            </div>
           </div>
 
-          <div>
-            <div className="mb-4">
-              <label className="block font-medium">Skills Offered</label>
+          <div className="space-y-4">
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Skills Offered
+              </label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {form.skillsOffered.map((skill, idx) => (
                   <span
                     key={idx}
                     onClick={() => removeSkill(idx, "skillsOffered")}
-                    className="bg-indigo-200 px-3 py-1 rounded-full cursor-pointer"
+                    className="bg-indigo-200 px-2 sm:px-3 py-1 rounded-full cursor-pointer text-xs sm:text-sm hover:bg-indigo-300 transition"
                   >
                     {skill} ×
                   </span>
@@ -189,19 +211,21 @@ const EditProfile = () => {
                     )
                   )
                 }
-                className="w-full border p-2 rounded"
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                 placeholder="Add a skill and press Enter"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block font-medium">Skills Wanted</label>
+            <div>
+              <label className="block font-medium text-sm sm:text-base mb-1">
+                Skills Wanted
+              </label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {form.skillsWanted.map((skill, idx) => (
                   <span
                     key={idx}
                     onClick={() => removeSkill(idx, "skillsWanted")}
-                    className="bg-pink-200 px-3 py-1 rounded-full cursor-pointer"
+                    className="bg-pink-200 px-2 sm:px-3 py-1 rounded-full cursor-pointer text-xs sm:text-sm hover:bg-pink-300 transition"
                   >
                     {skill} ×
                   </span>
@@ -220,18 +244,18 @@ const EditProfile = () => {
                     )
                   )
                 }
-                className="w-full border p-2 rounded"
+                className="w-full border border-gray-300 p-2 sm:p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                 placeholder="Add a skill and press Enter"
               />
             </div>
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center pt-4">
           <button
             type="submit"
             disabled={isLoading}
-            className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 disabled:opacity-50"
+            className="bg-indigo-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full hover:bg-indigo-700 disabled:opacity-50 transition text-sm sm:text-base font-semibold"
           >
             {isLoading ? "Saving..." : "Save Profile"}
           </button>

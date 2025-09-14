@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserCard from "./UserCard"
+import UserCard from "./UserCard";
 import axios from "axios";
 import { useContext } from "react";
 import { FilterUserContext } from "../context/FilterUserContxt";
@@ -9,15 +9,18 @@ const UserList = () => {
   const [page, setPage] = useState(0);
   const token = localStorage.getItem("skillSwapToken");
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  const {publicUser, setPublicUser} =  useContext(FilterUserContext)
+  const { publicUser, setPublicUser } = useContext(FilterUserContext);
   useEffect(() => {
     const fetchAllUser = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get/all/users`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/get/all/users`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const publicUsers = response.data.users;
 
@@ -45,18 +48,17 @@ const UserList = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 md:px-20 py-1 space-y-8 bg-gradient-to-br from-white via-[#f2f2f2] to-[#e0e0e0]">
-      
+    <div className="min-h-screen px-4 sm:px-6 md:px-8 lg:px-20 py-4 sm:py-6 space-y-6 sm:space-y-8 bg-gradient-to-br from-white via-[#f2f2f2] to-[#e0e0e0]">
       {publicUser.slice(start, end).map((user, index) => (
         <UserCard key={index} user={user} />
       ))}
 
       {/* Pagination */}
-      <div className="flex justify-center items-center flex-wrap gap-2 mt-8">
+      <div className="flex justify-center items-center flex-wrap gap-2 mt-6 sm:mt-8">
         <button
           onClick={() => handlePageChange(page - 1)}
           disabled={page === 0}
-          className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base transition"
         >
           Prev
         </button>
@@ -65,7 +67,7 @@ const UserList = () => {
           <button
             key={n}
             onClick={() => handlePageChange(n)}
-            className={`px-3 py-1 rounded ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded text-sm sm:text-base transition ${
               page === n
                 ? "bg-blue-600 text-white font-semibold"
                 : "bg-gray-100 hover:bg-gray-200"
@@ -78,7 +80,7 @@ const UserList = () => {
         <button
           onClick={() => handlePageChange(page + 1)}
           disabled={page === totalPages - 1}
-          className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base transition"
         >
           Next
         </button>

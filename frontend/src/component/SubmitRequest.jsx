@@ -71,12 +71,12 @@ const SubmitRequest = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-white py-8 px-4 sm:px-6">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white shadow-xl border border-gray-300 rounded-2xl p-8 space-y-6"
+        className="w-full max-w-md bg-white shadow-xl border border-gray-300 rounded-2xl p-6 sm:p-8 space-y-4 sm:space-y-6"
       >
-        <h2 className="text-2xl font-semibold text-gray-800 text-center">
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center">
           Send Skill Swap Request
         </h2>
 
@@ -86,7 +86,7 @@ const SubmitRequest = () => {
             Choose one of your offered skills
           </label>
           <select
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
             value={selectedOfferedSkill}
             onChange={(e) => setSelectedOfferedSkill(e.target.value)}
             required
@@ -110,7 +110,7 @@ const SubmitRequest = () => {
             Choose one of their wanted skills
           </label>
           <select
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
             value={selectedWantedSkill}
             onChange={(e) => setSelectedWantedSkill(e.target.value)}
             required
@@ -136,7 +136,7 @@ const SubmitRequest = () => {
           <textarea
             rows="4"
             placeholder="Type your message here..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-sm sm:text-base"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
@@ -147,7 +147,7 @@ const SubmitRequest = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow transition"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg shadow transition text-sm sm:text-base font-semibold w-full sm:w-auto"
           >
             Submit
           </button>

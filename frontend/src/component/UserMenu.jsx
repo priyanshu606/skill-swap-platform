@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const UserMenu = ({handleLogout, isOpen, onClose }) => {
+const UserMenu = ({ handleLogout, isOpen, onClose }) => {
   const menuRef = useRef();
 
   // Close on outside click
@@ -20,13 +20,14 @@ const UserMenu = ({handleLogout, isOpen, onClose }) => {
   return (
     <div
       ref={menuRef}
-      className="absolute right-0 mt-10 w-40 bg-white rounded-xl shadow-lg border z-50 animate-fadeIn"
+      className="absolute right-0 mt-2 sm:mt-10 w-36 sm:w-40 bg-white rounded-xl shadow-lg border z-50 animate-fadeIn"
     >
-      <ul className="py-2">
+      <ul className="py-1 sm:py-2">
         <li>
           <Link
             to="/view-profile"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            className="block px-3 sm:px-4 py-1.5 sm:py-2 text-gray-700 hover:bg-gray-100 text-sm sm:text-base transition"
+            onClick={onClose}
           >
             Open Profile
           </Link>
@@ -38,7 +39,7 @@ const UserMenu = ({handleLogout, isOpen, onClose }) => {
               onClose();
               alert("Sign out logic here");
             }}
-            className="w-full text-left px-4 cursor-pointer py-2 text-red-600 hover:bg-red-50"
+            className="w-full text-left px-3 sm:px-4 cursor-pointer py-1.5 sm:py-2 text-red-600 hover:bg-red-50 text-sm sm:text-base transition"
           >
             Sign Out
           </button>

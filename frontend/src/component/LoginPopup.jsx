@@ -5,11 +5,11 @@ import { AuthContext } from "../context/AuthContext";
 const LoginPopup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {showPopup,setShowPopup,signUpPopup,setSignUpPopup} =  useContext(AuthContext);
-  const handlePopup = ()=>{
-    setSignUpPopup(!signUpPopup),
-    setShowPopup(!showPopup);
-  }
+  const { showPopup, setShowPopup, signUpPopup, setSignUpPopup } =
+    useContext(AuthContext);
+  const handlePopup = () => {
+    setSignUpPopup(!signUpPopup), setShowPopup(!showPopup);
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -39,30 +39,32 @@ const LoginPopup = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <form
         onSubmit={handleLogin}
-        className="relative bg-white text-gray-600 max-w-[360px] w-full mx-4 md:p-6 p-4 py-8 text-left text-sm rounded-2xl shadow-2xl shadow-black/20"
+        className="relative bg-white text-gray-600 max-w-[360px] w-full p-4 sm:p-6 py-6 sm:py-8 text-left text-sm sm:text-base rounded-2xl shadow-2xl shadow-black/20"
       >
         {/* ❌ Close Button */}
         <button
           type="button"
-          onClick={()=>{setShowPopup(!showPopup)}}
-          className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-3xl cursor-pointer font-bold"
+          onClick={() => {
+            setShowPopup(!showPopup);
+          }}
+          className="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-400 hover:text-red-500 text-2xl sm:text-3xl cursor-pointer font-bold"
         >
           &times;
         </button>
 
-        <h2 className="text-2xl font-extrabold mb-9 text-center text-gray-800">
+        <h2 className="text-xl sm:text-2xl font-extrabold mb-6 sm:mb-9 text-center text-gray-800">
           Skill Swap Platform 👋
         </h2>
 
         {/* Email Input */}
-        <div className="flex items-center mb-3 border bg-indigo-50 border-gray-300 rounded-md px-2">
+        <div className="flex items-center mb-3 border bg-indigo-50 border-gray-300 rounded-md px-2 sm:px-3">
           <svg
-            width="18"
-            height="18"
-            className="mr-1"
+            width="16"
+            height="16"
+            className="mr-1 sm:mr-2 flex-shrink-0"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -85,7 +87,7 @@ const LoginPopup = () => {
           <input
             type="email"
             placeholder="Email"
-            className="w-full outline-none bg-transparent py-2.5"
+            className="w-full outline-none bg-transparent py-2 sm:py-2.5 text-sm sm:text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -93,11 +95,11 @@ const LoginPopup = () => {
         </div>
 
         {/* Password Input */}
-        <div className="flex items-center mb-4 border bg-indigo-50 border-gray-300 rounded-md px-2">
+        <div className="flex items-center mb-4 border bg-indigo-50 border-gray-300 rounded-md px-2 sm:px-3">
           <svg
-            width="13"
-            height="17"
-            className="mr-1"
+            width="12"
+            height="16"
+            className="mr-1 sm:mr-2 flex-shrink-0"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -109,7 +111,7 @@ const LoginPopup = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full outline-none bg-transparent py-2.5"
+            className="w-full outline-none bg-transparent py-2 sm:py-2.5 text-sm sm:text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -117,7 +119,7 @@ const LoginPopup = () => {
         </div>
 
         {/* Remember me & Forgot Password */}
-        <div className="flex items-center justify-between mb-6 text-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 text-xs sm:text-sm gap-2 sm:gap-0">
           <label className="flex items-center gap-2">
             <input type="checkbox" className="accent-indigo-500" />
             Remember me
@@ -130,14 +132,14 @@ const LoginPopup = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full mb-3 bg-indigo-500 hover:bg-indigo-600 transition py-2.5 rounded-lg text-white font-semibold cursor-pointer"
+          className="w-full mb-3 bg-indigo-500 hover:bg-indigo-600 transition py-2 sm:py-2.5 rounded-lg text-white font-semibold cursor-pointer text-sm sm:text-base"
         >
           Log In
         </button>
 
         {/* Sign up */}
-        <p className="text-center mt-4">
-          Don’t have an account?{" "}
+        <p className="text-center mt-3 sm:mt-4 text-xs sm:text-sm">
+          Don't have an account?{" "}
           <a
             href="#"
             className="text-blue-500 hover:underline font-medium"
